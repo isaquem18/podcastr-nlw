@@ -1,24 +1,91 @@
-import logo from './logo.svg';
-import './App.css';
+import MiniSquare from './MiniSquare';
+import { Square } from './styles';
 
 function App() {
+
+  function handleSelectedColor() {
+    const getColor = document.getElementById('getColor').value;
+    localStorage.setItem('color', getColor)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <input type="text" placeholder="#000" onChange={handleSelectedColor} id="getColor" />
+      <Square>
+      <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />    
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+        <MiniSquare />
+      </Square>
+    </>
   );
 }
 
