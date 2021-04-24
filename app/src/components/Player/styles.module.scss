@@ -1,0 +1,94 @@
+.playerContainer {
+    width: 26.5rem;
+    height: 100vh;
+    padding: 3rem 4rem;
+
+
+    background-color: var(--purple-500);
+    color: var(--white);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+
+    strong {
+        font-family: Lexend, sans-serif;
+        font-weight: 600;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .empty {
+     display:  flex;
+     flex-direction: column;
+     align-items: center;
+     width: 100%;
+     opacity: 0.4;
+
+    }
+
+    .emptyPlayer {
+        width: 100%;
+        height: 20rem;
+        border: 0.14rem dashed var(--purple-300);
+        border-radius: 1.5rem;
+        background: linear-gradient(143.8deg, rgba(145, 100, 250, 0.8) 0%, rgba(0,0,0,0) 100%);
+        padding: 4rem;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .progress {
+        width: 100%;
+        display: flex;
+        font-size: 0.875rem;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .slider {
+        width: 100%;  
+    }
+
+    .emptySlider {
+        flex: 1;
+        height: 0.4rem;
+        background-color: var(--gray-200);
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2.5rem;
+        gap: 0.8rem;
+    }
+
+    button {
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+
+        &.playButton {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 1rem;
+            background-color: var(--purple-400);
+        }
+    }
+
+    .playButton{
+
+    }
+}
+
