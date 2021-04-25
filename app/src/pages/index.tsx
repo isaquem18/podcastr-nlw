@@ -2,25 +2,111 @@ import { format, parseISO } from 'date-fns';
 import { GetStaticProps } from 'next';
 import ptBR from 'date-fns/locale/pt-BR';
 import convertDurationToTimeString from '../util/convertDurationToTimeString';
+import Image from 'next/image';
+import Link from 'next/link'
 
 import Head from 'next/head'
 import { Header } from '../components/Header'
 import { api } from '../services/api';
 import styles from './home.module.scss';
 
-interface HomeProps {
-  episodes: Array<{
-    id: string,
-    title: string,
-    members: string,
-  }>,
+
+interface Episode {
+  id: string
+  title: string
+  thumbnail: string
+  members: string
+  publishedAt: string
+  duration: number
+  durationAsString: string
+  url: string
 }
 
-export default function Home(props: HomeProps) {
+interface HomeProps {
+  latestEpisodes: Episode[]
+  allEpisodes: Episode[]
+}
+
+export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
 
   return (
     <main className={styles.homepage}>
-      <div>{JSON.stringify(props.episodes)}</div>
+      <section className={styles.latestEpisodes}>
+        <h2>Últimos lançamentos</h2>
+        <ul>
+          {latestEpisodes.map((episode) => {
+            return (
+              <li key={episode.title}>
+                <Image
+                  width="280"
+                  height="160"
+                  src={episode.thumbnail}
+                  alt="episode.title"
+                  objectFit="cover"
+                />
+
+                <div className={styles.episodeDetails}>
+                  <Link href={`/posts/${episode.id}`}>
+                    <a>{episode.title}</a>
+                  </Link>
+                  <p>{episode.members}</p>
+                  <span>{episode.publishedAt}</span>
+                  <span>{episode.durationAsString}</span>
+
+                  <button type="button">
+                    <img src="/play-green.svg" alt="tocar episodio" />
+                  </button>
+                </div>
+
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+
+      <section className={styles.allEpisodes}>
+        <h2>Todos os episódios</h2>
+        <table cellSpacing={0}>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Podcast</th>
+              <th>Integrantes</th>
+              <th>Data</th>
+              <th>Duração</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {allEpisodes.map((episode) => {
+              return (
+                <tr key={episode.id}>
+                  <td style={{minWidth: 80}}>
+                    <Image
+                      width={150}
+                      height={100}
+                      src={episode.thumbnail}
+                      alt={episode.title}
+                      objectFit="cover"
+                    />
+                  </td>
+                  <td><Link href={`/posts/${episode.id}`}><a>{episode.title}</a></Link></td>
+                  <td>{episode.members}</td>
+                  <td style={{ width: 120 }}>{episode.publishedAt}</td>
+                  <td>{episode.durationAsString}</td>
+                  <td>
+                    <button type="button">
+                      <img src="/play-green.svg" alt="trocar episodio" />
+                    </button>
+                  </td>
+                </tr>
+              )
+            })}
+
+          </tbody>
+        </table>
+      </section>
     </main>
   )
 }
@@ -37,7 +123,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const episodes = data.map((episode) => {
     return {
       id: episode.id,
-      title: episode.id,
+      title: episode.title,
       thumbnail: episode.thumbnail,
       members: episode.members,
       publishedAt: format(parseISO(episode.published_at), 'd MMM yy', { locale: ptBR }),
@@ -48,9 +134,15 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   })
 
+  const latestEpisodes = episodes.slice(0, 2);
+
+  const allEpisodes = episodes.slice(2, episodes.length);
+
+
   return {
     props: {
-      episodes: episodes,
+      latestEpisodes,
+      allEpisodes,
     },
     revalidate: 60 * 60 * 8,
   }
